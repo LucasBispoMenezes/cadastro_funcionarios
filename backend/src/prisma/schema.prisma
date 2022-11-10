@@ -1,0 +1,127 @@
+generator client {
+    provider = "prisma-client-js"
+}
+generator dbml {
+  provider = "prisma-dbml-generator"
+}
+datasource db {
+    provider = "mysql"
+    url      = env("DATABASE_URL")
+}
+
+model Pessoa {
+    id             Int              @id @default(autoincrement())
+    nomeCompleto   String           @unique @map("nome_completo")
+    dataNascimento DateTime         @map("data_nascimento")
+    sexo           String
+    estadoCivil    String           @map("estado_civil")
+    nacionalidade  String
+    naturalidade   String
+    situacao       String
+    cpfCnpj        String           @map("cpf_cnpj")
+    createdAt      DateTime         @default(now())
+    updatedAt      DateTime         @updatedAt
+    PessoasJuridica PessoaJuridica[]
+    pessoas       Relacionamento[] @relation("pessoa")
+    pessoaRelacionadas       Relacionamento[] @relation("pessoaRelacionada")
+    enderecos     Endereco[]
+    contaBancarias ContaBancaria[]
+    telefones    Telefone[]
+    Documento Documento[]
+    Usuario Usuario[]
+    @@map("Pessoas")
+}
+
+model PessoaJuridica {
+    id                Int      @id @default(autoincrement())
+    idPessoa          Int      @map("id_pessoa") 
+    nomeFantasia      String   @unique @map("nome_fantasia")
+    ramo              String   @map("ramo")
+    inscricaoEstadual String   @unique @map("inscricao_estadual")
+    createdAt         DateTime @default(now())
+    updatedAt         DateTime @updatedAt
+    pessoa            Pessoa   @relation(fields: [idPessoa], references: [id])
+
+    @@map("PessoaJuridicas")
+}
+model Relacionamento {
+    idPessoa Int   @map("id_pessoa")
+    pessoa Pessoa @relation("pessoa", fields: [idPessoa], references: [id]) 
+    idPessoaRelacionada Int @map("id_pessoa_relacionada")
+    pessoaRelacionada Pessoa @relation("pessoaRelacionada", fields: [idPessoaRelacionada], references: [id])
+    tipo      String
+        createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    @@id([idPessoa, idPessoaRelacionada])
+    @@map("Relacionamentos")
+}
+model Endereco {
+    id Int @id @default(autoincrement())
+    idPessoa Int @map("id_pessoa")
+    endereco String
+    principal Boolean
+        createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    enderecos Pessoa @relation(fields: [idPessoa], references: [id])
+    @@map("Enderecos")
+}
+
+model ContaBancaria {
+    id Int @id @default(autoincrement())
+    idPessoa Int @map("id_pessoa")
+    banco String
+    agencia String
+    conta String
+    principal Boolean
+        createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    contaBancaria Pessoa @relation(fields: [idPessoa], references: [id])
+    pix Pix[]
+    @@map("contaBancarias")
+}
+
+model Pix {
+    id Int @id @default(autoincrement())
+    idBanco Int @map("id_banco")
+    chave String
+    principal Boolean
+        createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    Conta ContaBancaria @relation(fields: [idBanco], references: [id])
+    @@map("Pix")
+}
+
+model Telefone {
+    id Int @id @default(autoincrement())
+    idPessoa Int @map("id_pessoa")
+    numero String
+    principal Boolean
+        createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    telefones Pessoa @relation(fields: [idPessoa], references: [id])
+    @@map("Telefones")
+}
+
+model Documento {
+    id Int @id @default(autoincrement())
+    idPessoa Int @map("id_pessoa")
+    nomedocs String @map("nome_docs")
+    numeroDeRegistro String @map("numero_de_registro")
+        createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    Documento Pessoa @relation(fields: [idPessoa], references: [id])
+    @@map("Documentos")
+}
+
+model Usuario {
+    id Int @id @default(autoincrement())
+    idPessoa Int @map("id_pessoa")
+    username String
+    email String @unique
+    senha String
+    role String
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    Usuario Pessoa @relation(fields: [idPessoa], references: [id])
+    @@map("Usuarios")
+}
