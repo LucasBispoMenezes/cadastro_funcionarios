@@ -60,7 +60,7 @@ model Endereco {
     idPessoa Int @map("id_pessoa")
     endereco String
     principal Boolean
-        createdAt DateTime @default(now())
+    createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
     enderecos Pessoa @relation(fields: [idPessoa], references: [id])
     @@map("Enderecos")
@@ -119,9 +119,14 @@ model Usuario {
     username String
     email String @unique
     senha String
-    role String
+    role Role
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
     Usuario Pessoa @relation(fields: [idPessoa], references: [id])
     @@map("Usuarios")
+}
+
+enum  Role {
+	admin
+	user
 }
