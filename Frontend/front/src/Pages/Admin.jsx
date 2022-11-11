@@ -7,7 +7,7 @@ const navigate = useNavigate();
 useEffect(() => {
 
 const token = isAuthenticated()
-//if(!token) navigate('/')
+if(!token) return navigate('/')
 })
     return (
         <nav>
