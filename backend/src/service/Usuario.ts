@@ -13,8 +13,7 @@ const findUniqueUser = async (username: string, password: string) => {
 		username:true,
 		role:true,
 	}})
-	
-	if(!user) throw new ErrorApi("Usuário não encontrado", 404)
+	if(!user || user === null) throw new ErrorApi("Usuário ou Senha Incorreta", 404)
 	if(!user.id) throw new ErrorApi("local não autorizado", 403)
 	return user
 }
