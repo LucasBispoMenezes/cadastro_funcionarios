@@ -5,15 +5,27 @@ function Juridica(props) {
         <>
             <label htmlFor="">
                 Nome Fantasia
-                <input type="text" {...props.p("nomeFantasia")} />
+                <input
+                    type="text"
+                    {...props.p("nomeFantasia", { required: false, value: "" })}
+                />
             </label>
             <label htmlFor="">
-            Ramo
-                <input type="text" {...props.p("ramo")} />
+                Ramo
+                <input
+                    type="text"
+                    {...props.p("ramo", { required: false, value: "l" })}
+                />
             </label>
             <label htmlFor="">
-            Inscrição Estadual
-                <input type="text" {...props.p("in")} />
+                Inscrição Estadual
+                <input
+                    type="text"
+                    {...props.p("inscricaoEstadual", {
+                        required: false,
+                        value: "",
+                    })}
+                />
             </label>
         </>
     );
