@@ -3,7 +3,7 @@ import React from "react";
 import { requestLogin } from "../helpers/requests";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { setToken } from "../helpers/localStorage";
+import { setToken } from "../helpers/sessionStorage";
 import { useNavigate } from "react-router-dom";
 
 export const Login = () => {

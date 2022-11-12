@@ -5,7 +5,6 @@ import { isAuthenticated } from '../helpers/isAuthenticated';
 export const Admin = () => {
 const navigate = useNavigate();
 useEffect(() => {
-
 const token = isAuthenticated()
 if(!token) return navigate('/')
 })
