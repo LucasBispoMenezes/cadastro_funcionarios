@@ -5,6 +5,12 @@ import { isAuthenticated } from "../helpers/isAuthenticated";
 import Pessoa from "./pessoa";
 import { Login } from "./Login";
 import MultiStep from "@armandoroman1016/react-multi-step-form";
+import Endereco from "./Endereco";
+import Telefone from "./telefone";
+import Conta from "./ContaBamcaria";
+import Docs from "./Documentos";
+import Relacionameto from "./Relacionameto";
+import Usuario from "./Usuario";
 
 function Cadastro() {
     const navigate = useNavigate();
@@ -15,12 +21,12 @@ function Cadastro() {
 
     const steps = [
         { name: "Cadastro de Pessoa", component: Pessoa },
-        { name: "Endereços", component: Login },
-        { name: "Telefone", component: Login },
-        { name: "Conta bancaria", component: Login },
-        { name: "Documentos", component: Login },
-        { name: "Relacionameto", component: Login },
-        { name: "Usuario", component: Login },        
+        { name: "Endereços", component: Endereco },
+        { name: "Telefone", component: Telefone },
+        { name: "Conta bancaria", component: Conta },
+        { name: "Documentos", component: Docs },
+        { name: "Relacionameto", component: Relacionameto },
+        { name: "Usuario", component: Usuario },
     ];
     return <MultiStep steps={steps}></MultiStep>;
 }
