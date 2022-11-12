@@ -5,24 +5,24 @@ import cadastroContext from "../context/contextCadastros";
 import { useMultiStep } from "@armandoroman1016/react-multi-step-form";
 
 function Pessoa() {
-
-    const { addNewData, data } = useContext(cadastroContext);
+    const { addNewData } = useContext(cadastroContext);
     const { setError } = useMultiStep();
-    const { register, handleSubmit,  watch,
+    const {
+        register,
+        handleSubmit,
+        watch,
         formState: { errors },
     } = useForm({
         defaultValues: { isJuridic: false, ramo: "" },
     });
 
-    const onSubmit = (data) =>addNewData(data)
+    const onSubmit = (data) => addNewData(data);
 
     useEffect(() => {
-        console.log(errors);
         setError(!!Object.keys(errors).length > 0);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [errors]);
 
-    console.log(data);
     return (
         <form method="post" onSubmit={handleSubmit(onSubmit)}>
             <label htmlFor="">
@@ -98,9 +98,13 @@ function Pessoa() {
             </label>
             <label htmlFor="">
                 Situação
-                <select name="" id="" {...register("situação", {
-                    required: "Situação é obrigatório",
-                })}>
+                <select
+                    name=""
+                    id=""
+                    {...register("situação", {
+                        required: "Situação é obrigatório",
+                    })}
+                >
                     <option value=""></option>
                     <option value="Regular">Regular</option>
                     <option value="Irregular">Iregular</option>
@@ -109,9 +113,12 @@ function Pessoa() {
             </label>
             <label htmlFor="">
                 CPF / CNPJ
-                <input type="text" {...register("cpfcnpj", {
-                required: "CPF/CNPJ é obrigatório",
-            })} />
+                <input
+                    type="text"
+                    {...register("cpfcnpj", {
+                        required: "CPF/CNPJ é obrigatório",
+                    })}
+                />
                 <span>{errors.cpfcnpj?.message}</span>
             </label>
             <label htmlFor="">
