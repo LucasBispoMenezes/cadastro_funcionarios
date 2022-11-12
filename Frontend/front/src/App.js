@@ -4,15 +4,17 @@ import { Login } from "./Pages/Login";
 import React from "react";
 import { Admin } from "./Pages/Admin";
 import Cadastro from './Pages/Cadastro';
-
+import DataValueConcat from "./context/cadastroProvider";
 
 const App = () => {
     return (
-        <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="/admin" element={<Admin />} />
-            <Route path="/admin/Cadastro" element={<Cadastro />} />
-        </Routes>
+        <DataValueConcat>
+            <Routes>
+                <Route path="/" element={<Login />} />
+                <Route path="/admin" element={<Admin />} />
+                <Route path="/admin/Cadastro" element={<Cadastro />} />
+            </Routes>
+            </DataValueConcat>
     );
 };
 
