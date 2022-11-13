@@ -2,14 +2,13 @@ import { useForm } from "react-hook-form";
 import React, { useContext } from "react";
 import cadastroContext from "../context/contextCadastros";
 function Docs() {
-    const { handleSubmit, register, watch } = useForm();
+    const { handleSubmit, register } = useForm();
     const { addNewData } = useContext(cadastroContext);
     const onSubmit = (data) => {
         const file = new FormData();
         file.append("file", data);
-        addNewData(file)
+        addNewData(file);
     };
-    console.log(watch("documento"));
     return (
         <form method="post" onSubmit={handleSubmit(onSubmit)}>
             <label for="formFileLg" class="form-label">
@@ -20,7 +19,6 @@ function Docs() {
                 id="formFileLg"
                 type="file"
                 {...register("documento")}
-                onChange={(e) => console.log(e.target.files)}
             ></input>
             <label htmlFor="" class="form-label">
                 Numero do Registro

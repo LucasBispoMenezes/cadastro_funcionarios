@@ -1,5 +1,4 @@
-
-import React, {  useContext  } from "react";
+import React, { useContext } from "react";
 import cadastroContext from "../context/contextCadastros";
 import { useForm, useFieldArray } from "react-hook-form";
 function Conta() {
@@ -40,9 +39,8 @@ function Conta() {
         "Telefone",
         "chave aleatoria",
     ];
-    console.log(watch("contas_bancarias"));
     return (
-        <form onSubmit={(data) => console.log(data)} class="mb-3">
+        <form class="mb-3">
             <button
                 onClick={(e) => {
                     e.preventDefault();
