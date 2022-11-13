@@ -1,8 +1,7 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-use-before-define */
-import React, { useState, useContext, useEffect } from "react";
+
+import React, {  useContext  } from "react";
 import cadastroContext from "../context/contextCadastros";
-import { useForm, useFieldArray, useWatch } from "react-hook-form";
+import { useForm, useFieldArray } from "react-hook-form";
 function Conta() {
     const { register, control, watch } = useForm({
         defaultValues: {
@@ -55,7 +54,7 @@ function Conta() {
             {fields.map((item, index) => {
                 return (
                     <div key={item.id}>
-                        <label htmlFor="">
+                        <label htmlFor="" class="form-label">
                             <span>nomeConta</span>
                             <select
                                 {...register(
@@ -72,7 +71,7 @@ function Conta() {
                                 })}
                             </select>
                         </label>
-                        <label htmlFor="">
+                        <label htmlFor="" class="form-label">
                             <span>numeroConta</span>
                             <input
                                 class="form-control form-control-lg"
@@ -83,7 +82,7 @@ function Conta() {
                                 id=""
                             />
                         </label>
-                        <label htmlFor="">
+                        <label htmlFor="" class="form-label">
                             <span>agencia</span>
                             <input
                                 class="form-control form-control-lg"
