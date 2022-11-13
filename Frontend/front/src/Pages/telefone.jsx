@@ -2,21 +2,19 @@ import React, { useState, useContext, useEffect } from "react";
 import cadastroContext from "../context/contextCadastros";
 
 function Telefone() {
-    const [telefone, setTelefone] = useState([{}]);
+    const [telefone, setTelefone] = useState([""]);
     const [isAble, setIsAble] = useState(false);
     const { addNewData } = useContext(cadastroContext);
 
-
-useEffect(() => {
-    if ( telefone[telefone.length - 1] === "") {
-       return  setIsAble(true);
-    }
-    setIsAble(false);
-
-}, [telefone])
+    useEffect(() => {
+        if (telefone[telefone.length - 1] === "") {
+            return setIsAble(true);
+        }
+        setIsAble(false);
+    }, [telefone]);
     const handleClick = (e) => {
         e.preventDefault();
-        setTelefone([...telefone, {}]);
+        setTelefone([...telefone, ""]);
     };
     const handleChange = (e, i) => {
         const inputData = [...telefone];
@@ -27,7 +25,7 @@ useEffect(() => {
         e.preventDefault();
         addNewData(telefone);
     };
-    
+
     const handleDelete = (e, index) => {
         const deleteData = [...telefone];
         deleteData.splice(index, 1);
@@ -54,7 +52,7 @@ useEffect(() => {
                             required
                             value={item}
                         />
-                           {index !== 0 && (
+                        {index !== 0 && (
                             <button
                                 onClick={(e) => {
                                     handleDelete(e, index);
