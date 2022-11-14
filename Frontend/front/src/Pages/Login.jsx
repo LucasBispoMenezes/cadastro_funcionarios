@@ -5,7 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { setToken } from "../helpers/sessionStorage";
 import { useNavigate } from "react-router-dom";
-
+import { setTokenInRequest } from "../helpers/requests";
 export const Login = () => {
     const navigate = useNavigate();
     const onSubmit = async (value) => {
@@ -18,6 +18,7 @@ export const Login = () => {
                 }
             );
             await setToken(data.token);
+            setTokenInRequest(data.token);
             setTimeout(() => {
                 navigate("/admin");
             }, 2000);
@@ -26,35 +27,39 @@ export const Login = () => {
         }
     };
 
-    const {
-        handleSubmit,
-        register,
-        formState: { isDirty, isValid },
-    } = useForm();
+    const { handleSubmit, register } = useForm();
     return (
         <form onSubmit={handleSubmit(onSubmit)} method="post">
             <ToastContainer />
-            <label htmlFor="username-input">
-                Usuario
-                <input
-                    type="text"
-                    id="username-input"
-                    {...register("username", {
-                        required: "Usuario Requerido",
-                        minLength: 3,
-                    })}
-                />
-            </label>
-            <label htmlFor="password-input">
-                Senha
-                <input
-                    type="password"
-                    name=""
-                    id="password-input"
-                    {...register("password")}
-                />
-            </label>
-            <input type="submit" disabled={!isDirty || !isValid} />
+            <div class="form-group">
+                <label htmlFor="username-input">
+                    Usuario
+                    <input
+                        type="text"
+                        id="username-input"
+                        {...register("username", {
+                            required: "Usuario Requerido",
+                            minLength: 3,
+                        })}
+                        required
+                        class="form-control"
+                    />
+                </label>
+            </div>
+            <div class="form-group">
+                <label htmlFor="password-input">
+                    Senha
+                    <input
+                        type="password"
+                        name=""
+                        id="password-input"
+                        {...register("password")}
+                        required
+                        class="form-control"
+                    />
+                </label>
+            </div>
+            <input type="submit" class="btn btn-primary" />
         </form>
     );
 };
