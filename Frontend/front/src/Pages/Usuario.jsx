@@ -1,41 +1,70 @@
+import { useForm } from "react-hook-form";
+import { useContext } from "react";
+import cadastroContext from "../context/contextCadastros";
+
 function Usuario() {
+    const { register, watch } = useForm();
+    const { addNewData } = useContext(cadastroContext);
     return (
         <form>
-            <div class="form-group">
+            <div className="form-group">
+                <label for="username">Username</label>
+                <input
+                    type="text"
+                    className="form-control"
+                    id="username"
+                    placeholder="username"
+                    {...register("username")}
+                />
+            </div>
+            <div className="form-group">
                 <label for="exampleInputEmail1">Endereço de email</label>
                 <input
                     type="email"
-                    class="form-control"
+                    className="form-control"
                     id="exampleInputEmail1"
                     aria-describedby="emailHelp"
                     placeholder="Seu email"
+                    {...register("email")}
                 />
-                <small id="emailHelp" class="form-text text-muted">
-                    Nunca vamos compartilhar seu email, com ninguém.
-                </small>
             </div>
-            <div class="form-group">
+            <div className="form-group">
                 <label for="exampleInputPassword1">Senha</label>
                 <input
                     type="password"
-                    class="form-control"
+                    className="form-control"
                     id="exampleInputPassword1"
                     placeholder="Senha"
+                    {...register("password")}
                 />
             </div>
-            <div class="form-group form-check">
-                <input
-                    type="checkbox"
-                    class="form-check-input"
-                    id="exampleCheck1"
-                />
-                <label class="form-check-label" for="exampleCheck1">
-                    Clique em mim
+            <div className="form-group">
+                <label htmlFor="">
+                    Função
+                    <select
+                        name=""
+                        id=""
+                        className="form-select"
+                        {...register("role")}
+                    >
+                        <option value="user">user</option>
+                        <option value="admin">admin</option>
+                    </select>
                 </label>
             </div>
-            <button type="submit" class="btn btn-primary">
-                Enviar
-            </button>
+            <div>
+                <button
+                    type="submit"
+                    /*  */ className="btn btn-primary mt-2"
+                    onClick={(e) => {
+                        e.preventDefault();
+                        //addNewData(watch())
+                        console.log(watch());
+                    }}
+                >
+                    Enviar
+                </button>
+            </div>
         </form>
     );
 }
