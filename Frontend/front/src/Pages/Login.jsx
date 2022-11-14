@@ -5,7 +5,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { setToken } from "../helpers/sessionStorage";
 import { useNavigate } from "react-router-dom";
-import { setTokenInRequest } from "../helpers/requests";
 export const Login = () => {
     const navigate = useNavigate();
     const onSubmit = async (value) => {
@@ -18,7 +17,6 @@ export const Login = () => {
                 }
             );
             await setToken(data.token);
-            setTokenInRequest(data.token);
             setTimeout(() => {
                 navigate("/admin");
             }, 2000);
