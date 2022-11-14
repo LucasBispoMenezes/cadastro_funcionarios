@@ -1,4 +1,3 @@
-/* eslint-disable import/no-unresolved */
 import { Routes, Route } from "react-router-dom";
 import { Login } from "./Pages/Login";
 import React from "react";
@@ -14,7 +13,7 @@ const App = () => {
                 <Route path="/admin" element={<Admin />} />
                 <Route path="/admin/Cadastro" element={<Cadastro />} />
             </Routes>
-            </DataValueConcat>
+        </DataValueConcat>
     );
 };
 
