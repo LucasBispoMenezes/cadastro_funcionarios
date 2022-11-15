@@ -16,7 +16,7 @@ function Pessoa() {
         defaultValues: { isJuridic: false, ramo: "" },
     });
 
-    const onSubmit = (data) => addNewData(data);
+    const onSubmit = (data) => addNewData(data, "pessoa");
 
     useEffect(() => {
         setError(!!Object.keys(errors).length > 0);
@@ -184,7 +184,8 @@ function Pessoa() {
                 </div>
                 {!watch("isJuridic") ? (
                     <label htmlFor="">
-                        seus Dados estão corretos ?<button>Sim, Estão!</button>
+                        seus Dados estão corretos ?
+                        <button class="btn btn-primary">Sim, Estão!</button>
                     </label>
                 ) : (
                     <>

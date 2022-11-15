@@ -6,7 +6,16 @@ import cadastroContext from "../context/contextCadastros";
 function Relacionameto() {
     const { addNewData } = useContext(cadastroContext);
     const [data, setData] = useState();
-    const { control, register, watch } = useForm([]);
+    const { control, register, handleSubmit } = useForm({
+        defaultValues: {
+            relacionamento: [
+                {
+                    value: "",
+                    tipo: "",
+                },
+            ],
+        },
+    });
     const { fields, append, remove } = useFieldArray({
         control,
         name: "relacionamento", // unique name for your Field Array
@@ -18,9 +27,11 @@ function Relacionameto() {
             setData(dataAPi?.data?.user);
         })();
     }, []);
-    console.log(watch("relacionamento"));
+    const onSubmit = (data) => {
+        addNewData(data, "relacionamento");
+    };
     return (
-        <form className="form-group">
+        <form className="form-group" onSubmit={handleSubmit(onSubmit)}>
             <button
                 onClick={(e) => {
                     e.preventDefault();
@@ -60,27 +71,24 @@ function Relacionameto() {
                             className="form-control form-control-lg"
                             {...register(`relacionamento.${index}.tipo`)}
                         />
-                        <button
-                            className="btn btn-danger"
-                            onClick={(e) => {
-                                remove(index);
-                            }}
-                        >
-                            apagar
-                        </button>
+                        {index === 0 ? null : (
+                            <button
+                                className="btn btn-danger"
+                                onClick={(e) => {
+                                    remove(index);
+                                }}
+                            >
+                                apagar
+                            </button>
+                        )}
                     </>
                 );
             })}
 
-            <button
-                className="btn btn-primary"
-                onClick={(e) => {
-                    e.preventDefault();
-                    addNewData(watch("relacionamento"));
-                }}
-            >
-                os dados estão corretos ?
-            </button>
+            <label htmlFor="">
+                seus Dados estão corretos ?
+                <button class="btn btn-primary">Sim, Estão!</button>
+            </label>
         </form>
     );
 }

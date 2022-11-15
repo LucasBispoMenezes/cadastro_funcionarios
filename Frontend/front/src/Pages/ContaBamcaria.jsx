@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import cadastroContext from "../context/contextCadastros";
 import { useForm, useFieldArray } from "react-hook-form";
 function Conta() {
-    const { register, control, watch } = useForm({
+    const { register, control, watch, handleSubmit } = useForm({
         defaultValues: {
             contas_bancarias: [
                 {
@@ -39,8 +39,11 @@ function Conta() {
         "Telefone",
         "chave aleatoria",
     ];
+    
+    const onSubmit = (data) => {addNewData(data, "conta")};
+    
     return (
-        <form class="mb-3">
+        <form class="mb-3" method="post" onSubmit={handleSubmit(onSubmit)}>
             <button
                 onClick={(e) => {
                     e.preventDefault();
@@ -127,14 +130,10 @@ function Conta() {
                     </div>
                 );
             })}
-            <button
-                onClick={(e) => {
-                    e.preventDefault();
-                    addNewData(watch("contas_bancarias"));
-                }}
-            >
-                os dados estão corretos ?
-            </button>
+            <label htmlFor="">
+                seus Dados estão corretos ?
+                <button class="btn btn-primary">Sim, Estão!</button>
+            </label>
         </form>
     );
 }

@@ -7,7 +7,7 @@ function Docs() {
     const onSubmit = (data) => {
         const file = new FormData();
         file.append("file", data);
-        addNewData(file);
+        addNewData(file, 'docs');
     };
     return (
         <form method="post" onSubmit={handleSubmit(onSubmit)}>
@@ -28,7 +28,10 @@ function Docs() {
                     {...register("numeroRegistro")}
                 />
             </label>
-            <button type="submit"> esse dados estão correto ?</button>
+            <label htmlFor="">
+                seus Dados estão corretos ?
+                <button class="btn btn-primary">Sim, Estão!</button>
+            </label>
         </form>
     );
 }
