@@ -1,4 +1,4 @@
-import { getToken } from "./sessionStorage";
+import { getToken } from "./sessionStorage.js";
 
 export const isAuthenticated = () => {
     const token = getToken()

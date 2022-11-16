@@ -1,20 +1,51 @@
 import React, { useState } from 'react';
-import cadastroContext from './contextCadastros';
+import cadastroContext from './contextCadastros.js';
 
 export default function DataValueConcat({ children }) {
-    const [data, setData] = useState([{}]);
+    const [pessoa, setPessoa] = useState({});
+    const [endereco, setEndereco] = useState([]);
+    const [telefone, setTelefone] = useState([]);
+    const [conta, setConta] = useState([]);
+    const [docs, setDocs] = useState([]);
+    const [Relacionameto, setRelacionameto] = useState([]);
+    const [usuario, setUsuario] = useState({});
 
-    function addNewData(obj) {
-        setData(
-            [
-                ...data,
-                obj
-            ]
-        );
+    function addNewData(data, type) {
+        switch (type) {
+            case 'pessoa':
+                setPessoa({ ...data })
+                break;
+            case 'endereco':
+                setEndereco(data)
+                break;
+            case 'telefone':
+                setTelefone(data)
+                break;
+            case 'conta':
+                setConta(data)
+                break;
+            case 'docs':
+                setDocs(data)
+                break;
+            case "relacionamento":
+                setRelacionameto(data)
+                break;
+            case "usuario":
+                setUsuario({ ...data })
+                break;
+            default:
+                console.log('erro', type);
+        }
     }
 
     const total = {
-        data,
+        pessoa,
+        telefone,
+        endereco,
+        conta,
+        docs,
+        Relacionameto,
+        usuario,
         addNewData
     }
     return (

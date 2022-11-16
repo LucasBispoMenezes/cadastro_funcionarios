@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { getToken } from './sessionStorage'
+import { getToken } from './sessionStorage.js'
 
 const instance = axios.create({
     baseURL: 'http://localhost:3001/',
@@ -12,14 +12,14 @@ export const requestLogin = async (url, body) => {
 
 export const getUser = async (url) => {
     return await instance.get(url, {
-        headers:{
-            common:{
+        headers: {
+            common: {
                 Authorization: getToken()
             }
         }
     })
 }
 
-export const setTokenInRequest =  (token) => {
-     return instance.defaults.headers.common.authorization = token
+export const setTokenInRequest = (token) => {
+    return instance.defaults.headers.common.authorization = token
 }
