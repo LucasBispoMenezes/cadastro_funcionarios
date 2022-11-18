@@ -18,8 +18,8 @@ const findUniqueUser = async (username: string, password: string) => {
 	return user
 }
 
-export const  getAll = () => {
-	return prisma.pessoa.findMany({
+export const  getAll = async () => {
+	return await prisma.pessoa.findMany({
 		select:{
 			id: true,
 			nomeCompleto: true,
