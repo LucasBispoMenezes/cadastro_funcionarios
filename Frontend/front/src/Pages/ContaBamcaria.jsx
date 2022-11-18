@@ -1,8 +1,17 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import cadastroContext from "../context/contextCadastros";
 import { useForm, useFieldArray } from "react-hook-form";
+import { useMultiStep } from "@armandoroman1016/react-multi-step-form";
+
 function Conta() {
-    const { register, control, watch, handleSubmit } = useForm({
+    const { setError } = useMultiStep();
+    const {
+        register,
+        control,
+        watch,
+        handleSubmit,
+        formState: { errors },
+    } = useForm({
         defaultValues: {
             contas_bancarias: [
                 {
@@ -19,6 +28,16 @@ function Conta() {
         name: "contas_bancarias",
         control,
     });
+
+    const isError =
+        Array.isArray(errors.contas_bancarias) &&
+        errors.contas_bancarias.length;
+    useEffect(() => {
+        if (isError) {
+            return setError(true);
+        }
+        return setError(false);
+    }, [isError]);
     const { addNewData } = useContext(cadastroContext);
     const Bancos = [
         "",
@@ -31,20 +50,17 @@ function Conta() {
         "Santander",
         "Outro",
     ];
-    const TipoPix = [
-        "",
-        "CPF",
-        "CNPJ",
-        "E-mail",
-        "Telefone",
-        "chave aleatoria",
-    ];
-    
-    const onSubmit = (data) => {addNewData(data, "conta")};
-    
+    const TipoPix = ["", "CPF", "E-mail", "Telefone", "chave aleatoria"];
+
+    const onSubmit = (data) => {
+        addNewData(data, "conta");
+    };
+
+    console.log(isError);
     return (
         <form class="mb-3" method="post" onSubmit={handleSubmit(onSubmit)}>
             <button
+                className="btn btn-primary"
                 onClick={(e) => {
                     e.preventDefault();
                     append({});
@@ -59,7 +75,8 @@ function Conta() {
                             <span>nomeConta</span>
                             <select
                                 {...register(
-                                    `contas_bancarias.${index}.nomeBanco`
+                                    `contas_bancarias.${index}.nomeBanco`,
+                                    { required: "Campo obrigatório" }
                                 )}
                                 class="form-select"
                             >
