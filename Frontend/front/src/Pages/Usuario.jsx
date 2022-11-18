@@ -1,12 +1,20 @@
 import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import cadastroContext from "../context/contextCadastros";
+import { useNavigate } from "react-router-dom";
 
 function Usuario() {
-    const { register, watch } = useForm();
+    const navigate = useNavigate();
+    const { register, handleSubmit } = useForm();
     const { addNewData } = useContext(cadastroContext);
+    const onSubmit = (data) => {
+        addNewData(data, "usuario");
+        setTimeout(() => {
+            navigate("/saving");
+        }, 1000);
+    };
     return (
-        <form>
+        <form onSubmit={handleSubmit(onSubmit)}>
             <div className="form-group">
                 <label for="username">Username</label>
                 <input
@@ -53,17 +61,7 @@ function Usuario() {
                 </label>
             </div>
             <div>
-                <button
-                    type="submit"
-                    /*  */ className="btn btn-primary mt-2"
-                    onClick={(e) => {
-                        e.preventDefault();
-                        //addNewData(watch())
-                        console.log(watch());
-                    }}
-                >
-                    Enviar
-                </button>
+                <button className="btn btn-primary mt-2">Enviar</button>
             </div>
         </form>
     );
