@@ -18,9 +18,10 @@ function Pessoa() {
 
     const onSubmit = (data) => addNewData(data, "pessoa");
 
+
     useEffect(() => {
         setError(!!Object.keys(errors).length > 0);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+       
     }, [errors]);
 
     return (
@@ -37,7 +38,9 @@ function Pessoa() {
                                     required: "Nome completo é obrigatório",
                                 })}
                             />
-                            <span>{errors.nomeCompleto?.message}</span>
+                            <span class="text-danger">
+                                {errors.nomeCompleto?.message}
+                            </span>
                         </label>
                     </div>
                 </div>
@@ -53,7 +56,9 @@ function Pessoa() {
                                         "Data de nascimento é obrigatório",
                                 })}
                             />
-                            <span>{errors.dataDeNascimento?.message}</span>
+                            <span class="text-danger">
+                                {errors.dataDeNascimento?.message}
+                            </span>
                         </label>
                     </div>
                 </div>
@@ -77,7 +82,9 @@ function Pessoa() {
                                     Prefiro Não dizer
                                 </option>
                             </select>
-                            <span>{errors.sexo?.message}</span>
+                            <span class="text-danger">
+                                {errors.sexo?.message}
+                            </span>
                         </label>
                     </div>
                 </div>
@@ -101,7 +108,9 @@ function Pessoa() {
                                 </option>
                                 <option value="Viúvo(a)">Viúvo(a)</option>
                             </select>
-                            <span>{errors.estadoCivil?.message}</span>
+                            <span class="text-danger">
+                                {errors.estadoCivil?.message}
+                            </span>
                         </label>
                     </div>
                 </div>
@@ -116,7 +125,9 @@ function Pessoa() {
                                     required: "Nacionalidade é obrigatório",
                                 })}
                             />
-                            <span>{errors.nacionalidade?.message}</span>
+                            <span class="text-danger">
+                                {errors.nacionalidade?.message}
+                            </span>
                         </label>
                     </div>
                 </div>
@@ -131,7 +142,9 @@ function Pessoa() {
                                     required: "Naturalidade é obrigatório",
                                 })}
                             />
-                            <span>{errors.naturalidade?.message}</span>
+                            <span class="text-danger">
+                                {errors.naturalidade?.message}
+                            </span>
                         </label>
                     </div>
                 </div>
@@ -151,7 +164,9 @@ function Pessoa() {
                                 <option value="Regular">Regular</option>
                                 <option value="Irregular">Iregular</option>
                             </select>
-                            <span>{errors.situação?.message}</span>
+                            <span class="text-danger">
+                                {errors.situação?.message}
+                            </span>
                         </label>
                     </div>
                 </div>
@@ -160,13 +175,18 @@ function Pessoa() {
                         <label htmlFor="">
                             CPF / CNPJ
                             <input
-                                type="text"
+                                type="number"
                                 className="form-control"
                                 {...register("cpfcnpj", {
                                     required: "CPF/CNPJ é obrigatório",
+                                    min: {
+                                        value: 11,
+                                    },
                                 })}
                             />
-                            <span>{errors.cpfcnpj?.message}</span>
+                            <span class="text-danger">
+                                {errors.cpfcnpj?.message}
+                            </span>
                         </label>
                     </div>
                 </div>
@@ -189,7 +209,8 @@ function Pessoa() {
                     </label>
                 ) : (
                     <>
-                        <Juridica p={register} />
+                        {console.log(errors)}
+                        <Juridica p={register} error={errors} />
                         <label htmlFor="">
                             seus Dados estão corretos ?
                             <button className="btn btn-primary">

@@ -11,10 +11,12 @@ function Juridica(props) {
                             type="text"
                             className="form-control"
                             {...props.p("nomeFantasia", {
-                                required: false,
-                                value: "",
+                                required: "Nome fantasia é obrigatório",
                             })}
                         />
+                        <span class="text-danger">
+                            {props.error?.nomeFantasia?.message}
+                        </span>
                     </label>
                 </div>
             </div>
@@ -26,10 +28,12 @@ function Juridica(props) {
                             type="text"
                             className="form-control"
                             {...props.p("ramo", {
-                                required: false,
-                                value: "l",
+                                required: "Ramo é obrigatório",
                             })}
                         />
+                        <span class="text-danger">
+                            {props.error?.ramo?.message}
+                        </span>
                     </label>
                 </div>
             </div>
@@ -38,13 +42,15 @@ function Juridica(props) {
                     <label htmlFor="">
                         Inscrição Estadual
                         <input
-                        className="form-control"
-                            type="text"
+                            className="form-control"
+                            type="number"
                             {...props.p("inscricaoEstadual", {
-                                required: false,
-                                value: "",
+                                required: "Inscrição Estadual é obrigatório",
                             })}
                         />
+                        <span class="text-danger">
+                            {props.error?.inscricaoEstadual?.message}
+                        </span>
                     </label>
                 </div>
             </div>
