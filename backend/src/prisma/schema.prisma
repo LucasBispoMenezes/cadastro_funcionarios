@@ -73,7 +73,7 @@ model ContaBancaria {
     agencia String
     conta String
     principal Boolean
-        createdAt DateTime @default(now())
+    createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
     contaBancaria Pessoa @relation(fields: [idPessoa], references: [id])
     pix Pix[]
