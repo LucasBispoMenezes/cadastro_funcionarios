@@ -37,4 +37,29 @@ export interface IcreatedJuridic {
 		password: string;
 		role: "admin" | "user";
 	};
+	contas_bancarias: [
+		{
+				nomeBanco: string,
+				numeroConta: string,
+				agencia: string,
+				isPix: boolean,
+				principal: boolean,
+				pix: {
+					tipo: string,
+					chave: string
+				}
+		}
+	]
 }
+
+export interface contas_bancarias {
+			nomeBanco: string,
+			numeroConta: string,
+			agencia: string,
+			isPix: boolean,
+			principal: boolean,
+			pix: {
+				tipo: string,
+				chave: string
+			}
+	}
