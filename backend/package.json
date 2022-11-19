@@ -9,7 +9,9 @@
 		"build": "tsc",
 		"generate": "npx prisma generate  --schema ./src/prisma/schema.prisma",
 		"test": "mocha --require ts-node/register ./src/test/**/*.test.ts",
-		"coverage": "nyc npm run test"
+		"coverage": "nyc npm run test",
+		"seed": " ts-node ./src/prisma/seed.ts",
+		"reset": "npx prisma migrate reset --schema ./src/prisma/schema.prisma && npm run seed"
 	},
 	"keywords": [],
 	"author": "",
