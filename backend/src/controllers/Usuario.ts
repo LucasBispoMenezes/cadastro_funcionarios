@@ -16,8 +16,6 @@ const getUser = async (req: Request, res: Response) => {
 export const getAllUser = async (req: Request, res: Response) => {
 	try {
 		const { authorization } = req.headers;
-
-		console.log(req.headers);
 		await verifyToken(authorization as string);
 		const user = await getAll();
 		return res.status(200).json({ user });
