@@ -1,40 +1,44 @@
 generator client {
     provider = "prisma-client-js"
 }
+
 generator dbml {
-  provider = "prisma-dbml-generator"
+    provider = "prisma-dbml-generator"
 }
+
 datasource db {
     provider = "mysql"
     url      = env("DATABASE_URL")
+    shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
 model Pessoa {
-    id             Int              @id @default(autoincrement())
-    nomeCompleto   String           @unique @map("nome_completo")
-    dataNascimento DateTime         @map("data_nascimento")
-    sexo           String
-    estadoCivil    String           @map("estado_civil")
-    nacionalidade  String
-    naturalidade   String
-    situacao       String
-    cpfCnpj        String           @map("cpf_cnpj")
-    createdAt      DateTime         @default(now())
-    updatedAt      DateTime         @updatedAt
-    PessoasJuridica PessoaJuridica[]
-    pessoas       Relacionamento[] @relation("pessoa")
-    pessoaRelacionadas       Relacionamento[] @relation("pessoaRelacionada")
-    enderecos     Endereco[]
-    contaBancarias ContaBancaria[]
-    telefones    Telefone[]
-    Documento Documento[]
-    Usuario Usuario[]
+    id                 Int              @id @default(autoincrement())
+    nomeCompleto       String           @unique @map("nome_completo")
+    dataNascimento     DateTime         @map("data_nascimento")
+    sexo               String
+    estadoCivil        String           @map("estado_civil")
+    nacionalidade      String
+    naturalidade       String
+    situacao           String
+    cpfCnpj            String           @map("cpf_cnpj")
+    createdAt          DateTime         @default(now())
+    updatedAt          DateTime         @updatedAt
+    Documento          Documento[]
+    enderecos          Endereco[]
+    PessoasJuridica    PessoaJuridica[]
+    pessoas            Relacionamento[] @relation("pessoa")
+    pessoaRelacionadas Relacionamento[] @relation("pessoaRelacionada")
+    telefones          Telefone[]
+    Usuario            Usuario[]
+    contaBancarias     ContaBancaria[]
+
     @@map("Pessoas")
 }
 
 model PessoaJuridica {
     id                Int      @id @default(autoincrement())
-    idPessoa          Int      @map("id_pessoa") 
+    idPessoa          Int      @map("id_pessoa")
     nomeFantasia      String   @unique @map("nome_fantasia")
     ramo              String   @map("ramo")
     inscricaoEstadual String   @unique @map("inscricao_estadual")
@@ -42,91 +46,109 @@ model PessoaJuridica {
     updatedAt         DateTime @updatedAt
     pessoa            Pessoa   @relation(fields: [idPessoa], references: [id])
 
+    @@index([idPessoa], map: "PessoaJuridicas_id_pessoa_fkey")
     @@map("PessoaJuridicas")
 }
+
 model Relacionamento {
-    idPessoa Int   @map("id_pessoa")
-    pessoa Pessoa @relation("pessoa", fields: [idPessoa], references: [id]) 
-    idPessoaRelacionada Int @map("id_pessoa_relacionada")
-    pessoaRelacionada Pessoa @relation("pessoaRelacionada", fields: [idPessoaRelacionada], references: [id])
-    tipo      String
-        createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-    @@id([idPessoa, idPessoaRelacionada])
+    id                  Int      @id @default(autoincrement())
+    idPessoa            Int      @map("id_pessoa")
+    idPessoaRelacionada Int      @map("id_pessoa_relacionada")
+    tipo                String
+    createdAt           DateTime @default(now())
+    updatedAt           DateTime @updatedAt
+    pessoa              Pessoa   @relation("pessoa", fields: [idPessoa], references: [id])
+    pessoaRelacionada   Pessoa   @relation("pessoaRelacionada", fields: [idPessoaRelacionada], references: [id])
+
+    @@index([idPessoaRelacionada], map: "Relacionamentos_id_pessoa_relacionada_fkey")
     @@map("Relacionamentos")
 }
+
 model Endereco {
-    id Int @id @default(autoincrement())
-    idPessoa Int @map("id_pessoa")
-    endereco String
-    principal Boolean
+    id        Int      @id @default(autoincrement())
+    idPessoa  Int      @map("id_pessoa")
+    endereco  String
+    principal Boolean? @default(false)
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
-    enderecos Pessoa @relation(fields: [idPessoa], references: [id])
+    enderecos Pessoa   @relation(fields: [idPessoa], references: [id])
+
+    @@index([idPessoa], map: "Enderecos_id_pessoa_fkey")
     @@map("Enderecos")
 }
 
 model ContaBancaria {
-    id Int @id @default(autoincrement())
-    idPessoa Int @map("id_pessoa")
-    banco String
-    agencia String
-    conta String
-    principal Boolean
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-    contaBancaria Pessoa @relation(fields: [idPessoa], references: [id])
-    pix Pix[]
+    id            Int      @id @default(autoincrement())
+    idPessoa      Int      @map("id_pessoa")
+    banco         String
+    agencia       String
+    conta         String
+    principal     Boolean? @default(false)
+    createdAt     DateTime @default(now())
+    updatedAt     DateTime @updatedAt
+    contaBancaria Pessoa   @relation(fields: [idPessoa], references: [id])
+    pix           Pix[]
+
+    @@index([idPessoa], map: "contaBancarias_id_pessoa_fkey")
     @@map("contaBancarias")
 }
 
 model Pix {
-    id Int @id @default(autoincrement())
-    idBanco Int @map("id_banco")
-    chave String
-    principal Boolean
-        createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-    Conta ContaBancaria @relation(fields: [idBanco], references: [id])
-    @@map("Pix")
+    id        Int           @id @default(autoincrement())
+    idBanco   Int           @map("id_banco")
+    chave     String
+    createdAt DateTime      @default(now())
+    updatedAt DateTime      @updatedAt
+    tipo      String
+    Conta     ContaBancaria @relation(fields: [idBanco], references: [id])
+
+    @@index([idBanco], map: "Pix_id_banco_fkey")
 }
 
 model Telefone {
-    id Int @id @default(autoincrement())
-    idPessoa Int @map("id_pessoa")
-    numero String
-    principal Boolean
-        createdAt DateTime @default(now())
+    id        Int      @id @default(autoincrement())
+    idPessoa  Int      @map("id_pessoa")
+    numero    String
+    principal Boolean? @default(false)
+    createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
-    telefones Pessoa @relation(fields: [idPessoa], references: [id])
+    telefones Pessoa   @relation(fields: [idPessoa], references: [id])
+
+    @@index([idPessoa], map: "Telefones_id_pessoa_fkey")
     @@map("Telefones")
 }
 
 model Documento {
-    id Int @id @default(autoincrement())
-    idPessoa Int @map("id_pessoa")
-    nomedocs String @map("nome_docs")
-    numeroDeRegistro String @map("numero_de_registro")
-        createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-    Documento Pessoa @relation(fields: [idPessoa], references: [id])
+    id               Int      @id @default(autoincrement())
+    idPessoa         Int      @map("id_pessoa")
+    numeroDeRegistro String   @map("numero_de_registro")
+    nomedocs         String   @map("nome_docs")
+    createdAt        DateTime @default(now())
+    updatedAt        DateTime @updatedAt
+    Documento        Pessoa   @relation(fields: [idPessoa], references: [id])
+
+    @@index([idPessoa], map: "Documentos_id_pessoa_fkey")
     @@map("Documentos")
 }
 
 model Usuario {
-    id Int @id @default(autoincrement())
-    idPessoa Int @map("id_pessoa")
-    username String
-    email String @unique
-    senha String
-    role Role
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-    Usuario Pessoa @relation(fields: [idPessoa], references: [id])
+    id        Int          @id @default(autoincrement())
+    idPessoa  Int          @map("id_pessoa")
+    username  String
+    email     String       @unique
+    senha     String
+    role      Usuario_role
+    createdAt DateTime     @default(now())
+    updatedAt DateTime     @updatedAt
+    Usuario   Pessoa       @relation(fields: [idPessoa], references: [id])
+
+    @@index([idPessoa], map: "Usuarios_id_pessoa_fkey")
     @@map("Usuarios")
 }
 
-enum  Role {
-	admin
-	user
+enum Usuario_role {
+    admin
+    user
+
+    @@map("Role")
 }
