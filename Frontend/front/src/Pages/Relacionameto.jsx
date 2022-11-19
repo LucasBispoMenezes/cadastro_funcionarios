@@ -56,7 +56,7 @@ function Relacionameto() {
                             {data?.map((item) => {
                                 return (
                                     <>
-                                        <option value={item.nomeCompleto}>
+                                        <option value={item.id}>
                                             {item.nomeCompleto}
                                         </option>
                                     </>
