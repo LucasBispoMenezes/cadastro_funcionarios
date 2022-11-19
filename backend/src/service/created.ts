@@ -63,10 +63,34 @@ const createPeapleJuridica = async (obj: IcreatedJuridic) => {
 				});
 			})
 		);
+		Promise.all(
+			obj.contas_bancarias.map(async (item) => {
+				await prisma.contaBancaria.create({
+					data: {
+						agencia: item.agencia,
+						banco: item.nomeBanco,
+						conta: item.numeroConta,
+						principal: item.principal,
+						contaBancaria: {
+							connect: {
+								nomeCompleto: obj.pessoa.nomeCompleto,
+							},
+						},
+						...(item.isPix && {
+							pix: {
+								create: {
+									tipo: item.pix?.tipo,
+									chave: item.pix?.chave,
+								},
+							},
+						}),
+					},
+				});
+			})
+		);
 		return "usuario cadastrado com sucesso";
 	} catch (error) {
-		console.log(error);
-		throw new ErrorApi(" Pessoa já cadastrada ", 409);
+		throw new ErrorApi("Erro interno", 500);
 	}
 };
 
