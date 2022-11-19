@@ -59,8 +59,6 @@ model Relacionamento {
     updatedAt           DateTime @updatedAt
     pessoa              Pessoa   @relation("pessoa", fields: [idPessoa], references: [id])
     pessoaRelacionada   Pessoa   @relation("pessoaRelacionada", fields: [idPessoaRelacionada], references: [id])
-
-    @@index([idPessoaRelacionada], map: "Relacionamentos_id_pessoa_relacionada_fkey")
     @@map("Relacionamentos")
 }
 
