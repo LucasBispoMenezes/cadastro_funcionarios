@@ -150,3 +150,18 @@ export const schemaUsuario = joi
 		"string.max": "O campo {#label} deve ter no máximo {#limit} caracteres",
 		"string.valid": "O campo {#label} deve ser um valor válido",
 	});
+
+export const schemaDocs = joi.object({
+	name: joi.string().required(),
+	numeros: joi.string().required(),
+}).messages({
+	"object.required": "O campo {#label} é obrigatório",
+	"string.empty": "O campo {#label} não pode ser vazio",
+	"string.required": "O campo {#label} é obrigatório",
+	"any.required": "O campo {#label} é obrigatório",
+	'any.unknown': "O campo {#label} não é permitido",
+	"any.invalid": "O campo {#label} contém um valor inválido",
+	"string.min": "O campo {#label} deve ter no mínimo {#limit} caracteres",
+	"string.max": "O campo {#label} deve ter no máximo {#limit} caracteres",
+	"string.valid": "O campo {#label} deve ser um valor válido",
+})
