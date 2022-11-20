@@ -54,14 +54,15 @@ describe("teste de integração  rota usuario", () => {
 			expect(req.body.message).to.be.equal("usuario criado com sucesso");
 		});
 		after(async () => {
+		await prisma.documento.deleteMany();
 			await prisma.endereco.deleteMany();
 			await prisma.telefone.deleteMany();
 			await prisma.pix.deleteMany();
 			await prisma.relacionamento.deleteMany();
-			await prisma.pessoaJuridica.deleteMany();
-			await prisma.contaBancaria.deleteMany();
 		});
 		after(async () => {
+			await prisma.pessoaJuridica.deleteMany();
+			await prisma.contaBancaria.deleteMany();
 			await prisma.usuario.delete({
 				where: {
 					email: bodyValid.usuario.email,
