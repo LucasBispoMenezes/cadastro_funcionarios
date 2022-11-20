@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
 import createPeapleJuridica from "../service/created";
+import "express-async-errors";
 
 export const created = async (req: Request, res: Response) => {
-	const r = await createPeapleJuridica(req.body);
-	res.json(r);
-	console.log(req.body);
+	await createPeapleJuridica(req.body);
+	res.status(200).json({ message: "usuario criado com sucesso" });
 	res.end();
 };
