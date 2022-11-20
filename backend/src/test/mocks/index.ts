@@ -297,11 +297,8 @@ export const bodyValid = {
 			value: "1",
 			tipo: "Dante Mcfarland",
 		},
-		{
-			value: "2",
-			tipo: "Dante Mcfarland",
-		},
 	],
+	docs: { name: "2654-7180-1-PB.pdf", numeros: "5555555555555555555555555" },
 	usuario: {
 		username: "lulkxydfot",
 		email: "funem@mlklaffilinator.com",
