@@ -61,6 +61,7 @@ export const schemaEndereco = joi
 		"any.unknown": "O campo {#label} não é permitido",
 		" any.invalid": "O campo {#label} contém um valor inválido",
 		"any.empty": "O campo {#label} não pode ser vazio",
+		"date.empty": "O campo {#label} não pode ser vazio",
 	});
 export const schemaTelefone = joi
 	.object({
