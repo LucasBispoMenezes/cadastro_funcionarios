@@ -49,7 +49,11 @@ export interface IcreatedJuridic {
 					chave: string
 				}
 		}
-	]
+	],
+	docs: {
+		name: string,
+		numeros: string
+	}
 }
 
 export interface contas_bancarias {
