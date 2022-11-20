@@ -3,7 +3,8 @@ import cadastroContext from "../context/contextCadastros";
 import { useForm, useFieldArray } from "react-hook-form";
 import { useMultiStep } from "@armandoroman1016/react-multi-step-form";
 
-function Conta() {
+function Conta() {  
+
     const { setError } = useMultiStep();
     const {
         register,
@@ -93,7 +94,8 @@ function Conta() {
                             <span>numeroConta</span>
                             <input
                                 class="form-control form-control-lg"
-                                type="text"
+                                type="number"
+                                minLength="6"
                                 {...register(
                                     `contas_bancarias.${index}.numeroConta`
                                 )}
@@ -104,7 +106,8 @@ function Conta() {
                             <span>agencia</span>
                             <input
                                 class="form-control form-control-lg"
-                                type="text"
+                                type="number"
+                                minLength="6"
                                 {...register(
                                     `contas_bancarias.${index}.agencia`
                                 )}

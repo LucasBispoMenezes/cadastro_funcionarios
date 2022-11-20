@@ -1,9 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
 import cadastroContext from "../context/contextCadastros";
 import { useForm, useFieldArray } from "react-hook-form";
+import { useMultiStep } from "@armandoroman1016/react-multi-step-form";
 
 function Telefone() {
     const { addNewData } = useContext(cadastroContext);
+    const { setError } = useMultiStep();
     const {
         control,
         register,
@@ -15,7 +17,11 @@ function Telefone() {
         },
     });
 
-    console.log(errors);
+    useEffect(() => {
+        setError(!!Object.keys(errors.endereco || errors).length > 0);
+    }, [errors]);
+
+   
     const [isHiden, setIsHiden] = useState(true);
     const { fields, append, remove } = useFieldArray({
         control,
@@ -53,10 +59,10 @@ function Telefone() {
                         </div>
                         <div key={item.id} class="input-group">
                             <input
-                                type="text"
+                                type="tel"
                                 class="form-control"
                                 placeholder="Digite seu endereço"
-                                {...register(`telefone.${index}.telefone`, {
+                                {...register(`telefone.${index}.numero`, {
                                     required: "Digite um endereço válido",
                                 })}
                             />

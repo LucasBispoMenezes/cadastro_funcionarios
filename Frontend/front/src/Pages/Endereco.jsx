@@ -1,25 +1,29 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import cadastroContext from "../context/contextCadastros";
 import { useForm, useFieldArray } from "react-hook-form";
-// import { useMultiStep } from "@armandoroman1016/react-multi-step-form";
+import { useMultiStep } from "@armandoroman1016/react-multi-step-form";
 
 function Endereco() {
-    const { control, register, handleSubmit } = useForm({
+    const { setError } = useMultiStep();
+    const {
+        control,
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm({
         defaultValues: {
             endereco: [{}],
         },
     });
 
-    const [isHiden, setIsHiden] = useState(true);
+    useEffect(() => {
+        setError(!!Object.keys(errors.endereco || errors).length > 0);
+    }, [errors]);
+
     const { fields, append, remove } = useFieldArray({
         control,
         name: "endereco",
     });
-
-    useEffect(() => {
-        if (fields.length > 0) return setIsHiden(false);
-        setIsHiden(true);
-    }, [fields]);
 
     const { addNewData } = useContext(cadastroContext);
     const onSubmit = (data) => {
