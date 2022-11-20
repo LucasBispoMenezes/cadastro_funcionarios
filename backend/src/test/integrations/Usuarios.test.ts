@@ -15,7 +15,7 @@ describe("teste de integração  rota usuario", () => {
 			expect(res.status).to.be.equal(404);
 			expect(res.body).to.be.an("object");
 			expect(res.body).to.have.property("message");
-			expect(res.body.message).to.be.equal("Usuário não encontrado");
+			expect(res.body.message).to.be.equal("Usuário ou Senha Incorreta");
 		});
 	});
 	it("deve retornar um erro 400 ao tentar logar  com um usuario ou senha vazio ", async () => {
