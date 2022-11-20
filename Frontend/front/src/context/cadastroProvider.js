@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import cadastroContext from './contextCadastros.js';
 
 export default function DataValueConcat({ children }) {
-    const [pessoa, setPessoa] = useState({});
+    const [pessoa, setPessoa] = useState({ });
     const [endereco, setEndereco] = useState([]);
     const [telefone, setTelefone] = useState([]);
-    const [conta, setConta] = useState([]);
+    const [contas_bancarias, setConta] = useState([]);
     const [docs, setDocs] = useState([]);
     const [Relacionameto, setRelacionameto] = useState([]);
     const [usuario, setUsuario] = useState({});
@@ -42,11 +42,11 @@ export default function DataValueConcat({ children }) {
         pessoa,
         telefone,
         endereco,
-        conta,
+        contas_bancarias,
         docs,
         Relacionameto,
         usuario,
-        addNewData
+        addNewData,
     }
     return (
         <cadastroContext.Provider value={total}>
