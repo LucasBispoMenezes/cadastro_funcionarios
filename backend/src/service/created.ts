@@ -1,6 +1,7 @@
 import { IcreatedJuridic } from "../interfaces/index";
 import prisma from "../database/prismaConnection";
 import { ErrorApi } from "../classes/classeError";
+import 'express-async-errors'
 
 const createPeapleJuridica = async (obj: IcreatedJuridic) => {
 	try {
@@ -89,8 +90,8 @@ const createPeapleJuridica = async (obj: IcreatedJuridic) => {
 			})
 		);
 		return "usuario cadastrado com sucesso";
-	} catch (error) {
-		throw new ErrorApi("Erro interno", 500);
+	} catch (error: any) {
+		throw new ErrorApi(`a chave ${error?.meta.target} duplicado(a)`, 400);
 	}
 };
 

@@ -1,6 +1,7 @@
 import prisma from "../database/prismaConnection"
 import 'express-async-errors'
 import { ErrorApi } from "../classes/classeError"
+import 'express-async-errors'
 
 const findUniqueUser = async (username: string, password: string) => {
 	const  user = await prisma.usuario.findFirst({
