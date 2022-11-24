@@ -14,7 +14,7 @@ jobs:
       with:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
-        proxy_key: ${{ secrets.SSHKEY }}
+        key: ${{ secrets.SSHKEY }}
         source: "."
         target: "/var/www/fusion"
  
@@ -23,6 +23,6 @@ jobs:
       with:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
-        proxy_key: ${{ secrets.SSHKEY }}
+        key: ${{ secrets.SSHKEY }}
         script: ls -las
         
