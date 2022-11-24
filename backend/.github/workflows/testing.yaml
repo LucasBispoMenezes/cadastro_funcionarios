@@ -6,7 +6,7 @@ on:
     push:
         branches: [ dev ]
 jobs:
-    validar_testes_de_Desenvolvimento:
+   backend:
         runs-on: ubuntu-20.04
         name: testes
         steps:
@@ -22,5 +22,6 @@ jobs:
               run:  cd backend && npm run build
             - name: espiando o projeto
               run: cd backend  && ls -las
+
                 
   
