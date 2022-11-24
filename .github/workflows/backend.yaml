@@ -20,6 +20,10 @@ jobs:
               run: cd backend && npm install
             - name: build do projeto
               run:  cd backend && npm run build
+            - name: merge do projeto
+              uses: maxkomarychev/merge-pal-action@vX.Y.Z
+              with:
+                  token:  ${{ secrets.GITHUB_TOKEN }}
             - name: espiando o projeto
               run: cd backend  && ls -las
 
