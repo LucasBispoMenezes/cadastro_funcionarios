@@ -1,0 +1,24 @@
+name: actions de desenvolvimento e testes
+on:
+    pull_request:
+        types: [opened, synchronize]
+        branches: [dev]
+    push:
+        branches: [dev]
+jobs:
+    validar_testes_de_Desenvolvimento:
+        runs-on: ubuntu-20.04
+        name: testes
+        steps:
+            - name: checkout do projeto
+              uses: actions/checkout@v3
+            - name: adiciona o node
+              uses: actions/setup-node@v3
+              with:
+                  node-version: "16" # versão do node
+            - name: instalação de dependências
+              run: npm install
+            - name: build do projeto
+              run: npm run build
+              if:
+            - name: mergea com a branch Main
