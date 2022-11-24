@@ -17,9 +17,9 @@ jobs:
               with:
                   node-version: "16" # versão do node
             - name: instalação de dependências
-              run: npm install
+              run: cd backend && npm install
             - name: build do projeto
               run: npm run build
-            - name: mergea com a branch Main
-              run: git merge origin/main
+            - name: espiando o projeto
+              run: ll
                 
