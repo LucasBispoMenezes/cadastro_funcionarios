@@ -21,9 +21,11 @@ jobs:
             - name: build do projeto
               run:  cd backend && npm run build
             - name: merge do projeto
-              uses: maxkomarychev/merge-pal-action@vX.Y.Z
+              uses: tukasz/direct-merge-action@master
               with:
-                  token:  ${{ secrets.GITHUB_TOKEN }}
+                  GITHUB_TOKEN:  ${{ secrets.GITHUB_TOKEN }}
+                  source-branch: dev-backend
+                  target-branch: main
             - name: espiando o projeto
               run: cd backend  && ls -las
 
