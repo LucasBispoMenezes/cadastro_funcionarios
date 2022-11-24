@@ -1,0 +1,33 @@
+name: actions backend
+on:
+    pull_request:
+        types: [opened, synchronize]
+        branches: [ dev-frontend ]
+    push:
+        branches: [ dev-frontend ]
+jobs:
+   backend:
+        runs-on: ubuntu-20.04
+        name: backend deploy
+        steps:
+            - name: checkout do projeto
+              uses: actions/checkout@v3
+            - name: adiciona o node
+              uses: actions/setup-node@v3
+              with:
+                  node-version: "16" # versão do node
+            - name: instalação de dependências
+              run: cd backend && npm install
+            - name: build do projeto
+              run:  cd backend && npm run build
+            - name: merge do projeto
+              uses: tukasz/direct-merge-action@master
+              with:
+                  GITHUB_TOKEN:  ${{ secrets.GITHUB_TOKEN }}
+                  source-branch: dev-backend
+                  target-branch: main
+            - name: espiando o projeto
+              run: cd backend  && ls -las
+
+                
+  
