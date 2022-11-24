@@ -16,7 +16,7 @@ jobs:
                   username: ${{ secrets.USERNAME }}
                   key: ${{ secrets.SSHKEY }}
                   source: "."
-                  target: "/var/www/fusion"
+                  target: "."
 
             - name: Executing remote command
               uses: appleboy/ssh-action@master
