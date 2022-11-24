@@ -3,24 +3,23 @@ on:
     pull_request:
         types: [opened, synchronize]
         branches: [dev]
+    push:
+        branches: [dev]
 jobs:
     validar_testes_de_Desenvolvimento:
         runs-on: ubuntu-20.04
         name: testes
         steps:
             - name: checkout do projeto
-              uses: actions/checkout@v3
+            - uses: actions/checkout@v3
             - name: adiciona o node
               uses: actions/setup-node@v3
               with:
                   node-version: "16" # versão do node
             - name: instalação de dependências
-              run: cd backend && npm install
+              run: npm install
             - name: build do projeto
-              run: | 
-                cd backend
-                npm run build
-            - name: espiando o projeto
-              run: ll
+              run: npm run build
+            - name: mergea com a branch Main
+              run: git merge origin/main
                 
-      
