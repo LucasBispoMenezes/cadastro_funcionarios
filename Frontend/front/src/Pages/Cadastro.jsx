@@ -1,9 +1,7 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { isAuthenticated } from "../helpers/isAuthenticated";
-// import StepZilla from "react-stepzilla";
 import Pessoa from "./pessoa";
-import { Login } from "./Login";
 import MultiStep from "@armandoroman1016/react-multi-step-form";
 import Endereco from "./Endereco";
 import Telefone from "./telefone";

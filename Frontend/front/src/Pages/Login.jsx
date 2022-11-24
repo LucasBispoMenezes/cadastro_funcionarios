@@ -18,7 +18,7 @@ export const Login = () => {
             );
             await setToken(data.token);
             setTimeout(() => {
-                navigate("/admin");
+                navigate("/admin/Cadastro");
             }, 2000);
         } catch (error) {
             toast.error(error.response.data.message);

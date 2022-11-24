@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 import cadastroContext from "../context/contextCadastros";
 import { useForm, useFieldArray } from "react-hook-form";
 import { useMultiStep } from "@armandoroman1016/react-multi-step-form";
+import "react-toastify/dist/ReactToastify.css";
 
 function Endereco() {
     const { setError } = useMultiStep();
@@ -32,6 +33,7 @@ function Endereco() {
 
     return (
         <form method="post" onSubmit={handleSubmit(onSubmit)}>
+            {errors?.endereco && <h1>Preencha Todos os Campos</h1>}
             <button
                 className="btn btn-primary"
                 onClick={(e) => {

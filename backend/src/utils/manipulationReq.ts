@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { contas_bancarias } from "../interfaces";
 import { Request } from "express";
 import Joi from "joi";
@@ -29,7 +30,7 @@ export const removerKeyPix = (req: Request): void => {
 		});
 };
 
-export const pixInsertKey = (req: Request, removeFieldPix: any) => {
+export const pixInsertKey = (req: Request, removeFieldPix: (req: Request) => void) => {
 	removeFieldPix(req);
 	const { contas_bancarias } = req.body;
 	if (req.body.contas_bancarias)

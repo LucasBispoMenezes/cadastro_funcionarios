@@ -4,6 +4,5 @@ import "express-async-errors";
 
 export const created = async (req: Request, res: Response) => {
 	await createPeapleJuridica(req.body);
-	res.status(200).json({ message: "usuario criado com sucesso" });
-	res.end();
+	return res.status(200).json({ message: "usuario criado com sucesso" });
 };

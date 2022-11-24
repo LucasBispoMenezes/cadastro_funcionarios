@@ -1,10 +1,12 @@
-name: actions de desenvolvimento e testes
+name: actions backend
 on:
     pull_request:
         types: [opened, synchronize]
-        branches: [dev]
+        branches: [ dev ]
+    push:
+        branches: [ dev ]
 jobs:
-    validar_testes_de_Desenvolvimento:
+   backend:
         runs-on: ubuntu-20.04
         name: testes
         steps:
@@ -17,10 +19,9 @@ jobs:
             - name: instalação de dependências
               run: cd backend && npm install
             - name: build do projeto
-              run: | 
-                cd backend
-                npm run build
+              run:  cd backend && npm run build
             - name: espiando o projeto
-              run: ll
+              run: cd backend  && ls -las
+
                 
-      
+  
