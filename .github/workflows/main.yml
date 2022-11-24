@@ -24,5 +24,4 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         proxy_key: ${{ secrets.SSHKEY }}
-        script: ls -las
-        
+        script: ls
