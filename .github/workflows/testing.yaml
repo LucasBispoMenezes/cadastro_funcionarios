@@ -11,7 +11,7 @@ jobs:
         name: testes
         steps:
             - name: checkout do projeto
-            - uses: actions/checkout@v3
+              uses: actions/checkout@v3
             - name: adiciona o node
               uses: actions/setup-node@v3
               with:
