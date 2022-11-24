@@ -2,13 +2,13 @@ name: actions backend
 on:
     pull_request:
         types: [opened, synchronize]
-        branches: [ dev ]
+        branches: [ dev-backend ]
     push:
-        branches: [ dev ]
+        branches: [ dev-backend ]
 jobs:
    backend:
         runs-on: ubuntu-20.04
-        name: testes
+        name: backend deploy
         steps:
             - name: checkout do projeto
               uses: actions/checkout@v3
