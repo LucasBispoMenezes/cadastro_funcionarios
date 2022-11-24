@@ -2,7 +2,7 @@ name: actions de desenvolvimento e testes
 on:
     pull_request:
         types: [opened, synchronize]
-        branches: [dev]
+        branches: [ dev ]
 jobs:
     validar_testes_de_Desenvolvimento:
         runs-on: ubuntu-20.04
@@ -19,7 +19,7 @@ jobs:
             - name: build do projeto
               run: | 
                 cd backend
-                npm run build
+                npm run start
             - name: espiando o projeto
               run: ll
                 
