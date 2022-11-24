@@ -1,4 +1,4 @@
-name: actions de desenvolvimento e testes
+name: actions backend
 on:
     pull_request:
         types: [opened, synchronize]
