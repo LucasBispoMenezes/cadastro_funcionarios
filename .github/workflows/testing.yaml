@@ -3,6 +3,8 @@ on:
     pull_request:
         types: [opened, synchronize]
         branches: [ dev ]
+    push:
+        branches: [ dev ]
 jobs:
     validar_testes_de_Desenvolvimento:
         runs-on: ubuntu-20.04
