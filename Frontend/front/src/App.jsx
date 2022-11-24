@@ -1,19 +1,17 @@
 import { Routes, Route } from "react-router-dom";
 import { Login } from "./Pages/Login";
 import React from "react";
-import { Admin } from "./Pages/Admin";
-import Cadastro from './Pages/Cadastro';
+import Cadastro from "./Pages/Cadastro";
 import DataValueConcat from "./context/cadastroProvider";
-import Loading from './Pages/loading';
+import Created from "./Pages/created";
 
 const App = () => {
     return (
         <DataValueConcat>
             <Routes>
                 <Route path="/" element={<Login />} />
-                <Route path="/admin" element={<Admin />} />
                 <Route path="/admin/Cadastro" element={<Cadastro />} />
-                <Route path="/saving" element={<Loading />} />
+                <Route path="/saving" element={<Created />} />
             </Routes>
         </DataValueConcat>
     );

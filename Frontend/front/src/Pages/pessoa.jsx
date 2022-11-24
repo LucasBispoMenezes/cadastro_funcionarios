@@ -18,14 +18,13 @@ function Pessoa() {
 
     const onSubmit = (data) => addNewData(data, "pessoa");
 
-
     useEffect(() => {
         setError(!!Object.keys(errors).length > 0);
-       
     }, [errors]);
 
     return (
         <form method="post" onSubmit={handleSubmit(onSubmit)}>
+            {errors.nomeCompleto && <h1>Preencha Todos os Campos</h1>}
             <div class="row g-2">
                 <div class="col-6">
                     <div class="input-group">
@@ -191,15 +190,13 @@ function Pessoa() {
                     </div>
                 </div>
                 <div class="col-6">
-                    <div class="input-group">
-                        <label htmlFor="">
-                            é Pessoa Física?
-                            <input
-                                type="checkbox"
-                                {...register("isJuridic")}
-                                id=""
-                            />
-                        </label>
+                    <div class="form-check">
+                        <input
+                            type="checkbox"
+                            {...register("isJuridic")}
+                            id=""
+                        />
+                        <label htmlFor="">é Pessoa Física?</label>
                     </div>
                 </div>
                 {!watch("isJuridic") ? (

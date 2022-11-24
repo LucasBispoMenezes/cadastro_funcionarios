@@ -21,7 +21,6 @@ function Telefone() {
         setError(!!Object.keys(errors.endereco || errors).length > 0);
     }, [errors]);
 
-   
     const [isHiden, setIsHiden] = useState(true);
     const { fields, append, remove } = useFieldArray({
         control,
@@ -37,6 +36,7 @@ function Telefone() {
     };
     return (
         <form method="post" onSubmit={handleSubmit(onSubmit)}>
+        {errors?.telefone && <h1>Preencha Todos os Campos</h1>}
             <button
                 className="btn btn-primary"
                 onClick={(e) => {
@@ -53,17 +53,17 @@ function Telefone() {
                         <div>
                             <label htmlFor="" key={index + 10 * 3}>
                                 {index === 0
-                                    ? " Endereço Principal"
-                                    : "Endereço Secundário:"}
+                                    ? " Telefone Principal"
+                                    : "Telefone Secundário:"}
                             </label>
                         </div>
                         <div key={item.id} class="input-group">
                             <input
                                 type="tel"
                                 class="form-control"
-                                placeholder="Digite seu endereço"
+                                placeholder="Digite seu Telefone"
                                 {...register(`telefone.${index}.numero`, {
-                                    required: "Digite um endereço válido",
+                                    required: "Digite um Telefone válido",
                                 })}
                             />
                             {index === 0 ? (
