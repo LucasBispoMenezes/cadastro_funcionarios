@@ -8,12 +8,12 @@ export const midErro = (
 	next: NextFunction
 ) => {
 	if (!err) return next();
-	if (!err.statusCode)
-		return res
-			.status(500)
-			.json({
-				message:
-					"Houve um Erro interno, PorFavor entre em contato com o adminstrador",
-			});
+	if (!err.statusCode) {
+		console.log(err.message, err.stack);
+		return res.status(500).json({
+			message:
+				"Houve um Erro interno, PorFavor entre em contato com o adminstrador",
+		});
+	}
 	return res.status(err.statusCode).json({ message: err.message });
 };

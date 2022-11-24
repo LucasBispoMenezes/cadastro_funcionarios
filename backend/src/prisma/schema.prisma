@@ -70,7 +70,7 @@ model Endereco {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
     enderecos Pessoa   @relation(fields: [idPessoa], references: [id])
-
+    
     @@index([idPessoa], map: "Enderecos_id_pessoa_fkey")
     @@map("Enderecos")
 }

@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { IcreatedJuridic } from "../interfaces/index";
 import prisma from "../database/prismaConnection";
 import { ErrorApi } from "../classes/classeError";
-import 'express-async-errors'
+import "express-async-errors";
 
 const createPeapleJuridica = async (obj: IcreatedJuridic) => {
 	try {
@@ -27,6 +28,7 @@ const createPeapleJuridica = async (obj: IcreatedJuridic) => {
 				enderecos: {
 					createMany: {
 						data: obj.endereco,
+						skipDuplicates: true,
 					},
 				},
 				telefones: {
@@ -43,6 +45,12 @@ const createPeapleJuridica = async (obj: IcreatedJuridic) => {
 						senha: obj.usuario.password,
 					},
 				},
+				Documento:{
+					create:{
+						nomedocs: obj.docs.name,
+						numeroDeRegistro: obj.docs.numeros,
+					}
+				}		
 			},
 		});
 		Promise.all(
@@ -91,6 +99,7 @@ const createPeapleJuridica = async (obj: IcreatedJuridic) => {
 		);
 		return "usuario cadastrado com sucesso";
 	} catch (error: any) {
+		console.log(error);
 		throw new ErrorApi(`a chave ${error?.meta.target} duplicado(a)`, 400);
 	}
 };

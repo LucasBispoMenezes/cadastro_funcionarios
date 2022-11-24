@@ -1,9 +1,9 @@
 import exp from "express";
-import getUser, { getAllUser } from "../controllers/Usuario";
+import service from "../controllers/Usuario";
 
 const rUsuario = exp.Router();
 
-rUsuario.post("/login", getUser);
-rUsuario.get("/", getAllUser);
-rUsuario.post("/create", getUser);
+rUsuario.post("/login", service.getUser);
+rUsuario.get("/", service.getAllUser);
+
 export default rUsuario;
