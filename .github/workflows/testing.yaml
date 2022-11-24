@@ -17,9 +17,7 @@ jobs:
             - name: instalação de dependências
               run: cd backend && npm install
             - name: build do projeto
-              run: | 
-                cd backend
-                npm run start
+              run:  cd backend && npm run build
             - name: espiando o projeto
               run: ll
                 
