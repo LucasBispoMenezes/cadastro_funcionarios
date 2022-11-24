@@ -21,6 +21,6 @@ jobs:
             - name: build do projeto
               run:  cd backend && npm run build
             - name: espiando o projeto
-              run: ll
+              run: ls -las
                 
   
